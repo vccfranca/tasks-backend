@@ -42,8 +42,8 @@ pipeline {
                 withSonarQubeEnv('sonar-qualitygate') {
                     sh "${scannerSonar}/bin/sonar-scanner \
                     -e -Dmvn -X sonar:sonar \
-                    -e -Dsonar.projectKey=DeployBack \
-                    -e -Dsonar.host.url=http://192.168.0.121:9000 \
+                    -e -Dsonar.projectKey="DeployBack" \
+                    -e -Dsonar.host.url="http://192.168.0.121:9000" \
                     -e -Dsonar.login="09eb73b479ebf07efc6f91a8c1522943773ece4f"
                     -e -Dsonar.java.binaries=target \
                     -e -Dsonar.covarege.exclusions=**/mvn/**,**/scr/teste/**,**/model/**,**/Application.java/**
