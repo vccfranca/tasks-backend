@@ -50,8 +50,7 @@ pipeline {
                     -e sonar.host.url="${sonar_host}" \
                     -e sonar.login="${sonar_login}"
                     -e sonar.java.binaries=target \
-                    -e sonar.covarege.exclusions=**/mvn/**,**/scr/teste/**,**/model/**,**/Application.java/**
-                    "
+                    -e sonar.covarege.exclusions=**/mvn/**,**/scr/teste/**,**/model/**,**/Application.java"
                 }
             }
         }
