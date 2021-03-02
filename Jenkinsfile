@@ -1,7 +1,8 @@
 // # Define a tag que inicia o pipeline
 pipeline {
     nome_projeto="DeployBack"
-    sonar_login="09eb73b479ebf07efc6f91a8c1522943773ece4f"
+    //sonar_login="09eb73b479ebf07efc6f91a8c1522943773ece4f"
+    sonar_login="62cbbfd2f357c6897f9b54ee175f7e360bb6e937"
     sonar_host="http://192.168.0.121:9000"
 
     // # Define o agent que vai ser executado, no caso abaixo qualquer um
@@ -43,11 +44,11 @@ pipeline {
                     def scannerHome = tool 'sonarqube';
                         withSonarQubeEnv("sonar-qualitygate") {
                         sh "${tool("sonarqube")}/bin/sonar-scanner \
-                        -Dsonar.projectKey=test-node-js \
+                        -Dsonar.projectKey="$nome_projeto" \
                         -Dsonar.sources=. \
                         -Dsonar.css.node=. \
-                        -Dsonar.host.url=http://your-ip-here:9000 \
-                        -Dsonar.login=your-generated-token-from-sonarqube-container"
+                        -Dsonar.host.url="$sonar_host" \
+                        -Dsonar.login="$sonar_login""
                    }
                 }
             }
