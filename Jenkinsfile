@@ -39,7 +39,7 @@ pipeline {
         }
         stage ('Sonar Analise') {
             // # Criando uma varivael para rodar o sonar configurado de acordo com o Global Toll Configuration do Jenkins
-            enviroment {
+            environment {
                 scannerSonar = tool 'sonar-scanner'
             }
             steps {
