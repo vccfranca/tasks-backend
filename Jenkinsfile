@@ -45,12 +45,12 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonar-qualitygate') {
                     sh "${scannerSonar}/bin/sonar-scanner \
-                    -e -Dmvn -X sonar:sonar \
-                    -e -Dsonar.projectKey="${nome_projeto}" \
-                    -e -Dsonar.host.url="${sonar_host}" \
-                    -e -Dsonar.login="${sonar_login}"
-                    -e -Dsonar.java.binaries=target \
-                    -e -Dsonar.covarege.exclusions=**/mvn/**,**/scr/teste/**,**/model/**,**/Application.java/**
+                    -e Dmvn -X sonar:sonar \
+                    -e Dsonar.projectKey="${nome_projeto}" \
+                    -e Dsonar.host.url="${sonar_host}" \
+                    -e Dsonar.login="${sonar_login}"
+                    -e Dsonar.java.binaries=target \
+                    -e Dsonar.covarege.exclusions=**/mvn/**,**/scr/teste/**,**/model/**,**/Application.java/**
                     "
                 }
             }
