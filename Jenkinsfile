@@ -19,9 +19,11 @@ pipeline {
         }
         stage ('Unit Testes') {
             steps {
-                sh 'mvn clean test'
+                // # Ao executar o teste aqui temos de prestar atenção para não colocar o clena antes, pois o mesmo vai apagar o conteudo da pasta target gerado no build
+                sh 'mvn test'
             }
         }
+        stage
 
     }
 }
