@@ -33,6 +33,17 @@ pipeline {
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }    
         }
+        stage ('Sonar Analise') {
+            // # Criando uma varivael para rodar o sonar configurado de acordo com o Global Toll Configuration do Jenkins
+            enviroment {
+                scannerSonar = tool 'sonar-scanner'
+            }
+            steps {
+                sh "${scannerSonar}/bin/sonar-scanner -e -Dmvn -X sonar:sonar -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://192.168.0.121:9000 -Dsonar.login=09eb73b479ebf07efc6f91a8c1522943773ece4f -Dsonar.java.binaries=target -Dsonar.covarege.exclusions=**/mvn/**,**/scr/teste/**,**/model/**,**/Application.java/**,"
+            }
+        }
 
     }
 }
+
+
