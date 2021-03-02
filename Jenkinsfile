@@ -1,5 +1,6 @@
 // # Define a tag que inicia o pipeline
-pipeline {
+// pipeline {
+node {
     // # Define o agent que vai ser executado, no caso abaixo qualquer um
     agent any
 
