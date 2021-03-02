@@ -28,7 +28,7 @@ pipeline {
                 dependencyCheck additionalArguments: '', odcInstallation: 'Owasp-6.1.1'
             }
         }
-        Stage ('Publicando Resultados OWAS') {
+        stage ('Publicando Resultados OWAS') {
             steps {
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }    
