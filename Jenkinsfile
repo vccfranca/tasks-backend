@@ -8,7 +8,7 @@ pipeline {
         stage ('Build Backend') {
             // # Os steps são os passos que nosso stage vai fazer.
             steps {
-                sh 'mvn clean packge'
+                sh 'mvn clean package'
             }
         }
     }
