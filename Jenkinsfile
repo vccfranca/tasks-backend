@@ -37,23 +37,38 @@ pipeline {
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }    
         }
-        stage ('Sonar Analise') {
-            // # Criando uma varivael para rodar o sonar configurado de acordo com o Global Toll Configuration do Jenkins
-            environment {
-                scannerSonar = tool 'sonar-scanner'
-            }
+        stage('Code Quality Check via SonarQube') {
             steps {
-                withSonarQubeEnv('sonar-qualitygate') {
-                    sh "${scannerSonar}/bin/sonar-scanner \
-                         mvn -X sonar:sonar \
-                         sonar.projectKey="${nome_projeto}" \
-                         sonar.host.url="${sonar_host}" \
-                         sonar.login="${sonar_login}" \
-                         sonar.java.binaries="target" \
-                         sonar.covarege.exclusions=**/mvn/**,**/scr/teste/**,**/model/**,**/Application.java"
+                script {
+                    def scannerHome = tool 'sonarqube';
+                        withSonarQubeEnv("sonar-qualitygate") {
+                        sh "${tool("sonarqube")}/bin/sonar-scanner \
+                        -Dsonar.projectKey=test-node-js \
+                        -Dsonar.sources=. \
+                        -Dsonar.css.node=. \
+                        -Dsonar.host.url=http://your-ip-here:9000 \
+                        -Dsonar.login=your-generated-token-from-sonarqube-container"
+                   }
                 }
             }
         }
+        // stage ('Sonar Analise') {
+        //     // # Criando uma varivael para rodar o sonar configurado de acordo com o Global Toll Configuration do Jenkins
+        //     environment {
+        //         scannerSonar = tool 'sonar-scanner'
+        //     }
+        //     steps {
+        //         withSonarQubeEnv('sonar-qualitygate') {
+        //             sh "${scannerSonar}/bin/sonar-scanner \
+        //                  mvn -X sonar:sonar \
+        //                  sonar.projectKey="${nome_projeto}" \
+        //                  sonar.host.url="${sonar_host}" \
+        //                  sonar.login="${sonar_login}" \
+        //                  sonar.java.binaries="target" \
+        //                  sonar.covarege.exclusions=**/mvn/**,**/scr/teste/**,**/model/**,**/Application.java"
+        //         }
+        //     }
+        // }
 
     }
 }
