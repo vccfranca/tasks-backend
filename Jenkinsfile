@@ -3,6 +3,9 @@ pipeline {
     // # Define o agent que vai ser executado, no caso abaixo qualquer um
     agent any
 
+     tools {
+        maven "MAVEN_INSTALADO_CONTAINER"
+    }
     
     // # Os stages que vão ter na nossa pipeline no momento em que estiver em execução.
     stages {
