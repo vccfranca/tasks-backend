@@ -23,7 +23,16 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage
+        stage ('Check Dependencias com OWASP') {
+            steps {
+                dependencyCheck additionalArguments: '', odcInstallation: 'Owasp-6.1.1'
+            }
+        }
+        Stage ('Publicando Resultados OWAS') {
+            steps {
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }    
+        }
 
     }
 }
