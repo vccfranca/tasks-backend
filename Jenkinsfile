@@ -5,7 +5,7 @@ pipeline {
 
 
     // # Os stages que vão ter na nossa pipeline no momento em que estiver em execução.
-    stages {
+    // stages {
         // # Agora dentro da tag stages que colocamos cada passo "stage" a ser feito pelo nosso pipeline.
         stage ('Build Backend') {
             withMaven(maven: 'MAVEN_INSTALADO_CONTAINER') {
@@ -16,5 +16,5 @@ pipeline {
                
             }  
         }
-    }
+    // }
 }
