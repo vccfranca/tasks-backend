@@ -13,7 +13,7 @@ pipeline {
 
      tools {
         maven "MAVEN_INSTALADO_CONTAINER"
-        scannerSonar "sonar-scanner"
+        scannerHome "sonar-scanner"
     }
     
     // # Os stages que vão ter na nossa pipeline no momento em que estiver em execução.
@@ -45,7 +45,7 @@ pipeline {
         stage ('Sonar Analise') {
             steps {
                 withSonarQubeEnv('sonar-qualitygate') {
-                    sh "${scannerSonar}/bin/sonar-scanner " +
+                    sh "${scannerHome}/bin/sonar-scanner " +
                          "-Dmvn -X sonar:sonar" +
                          "-Dsonar.projectKey=${nome_projeto}" +
                          "-Dsonar.host.url=${sonar_host}" +
