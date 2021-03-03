@@ -44,13 +44,13 @@ pipeline {
         stage ('Sonar Analise') {
             steps {
                 withSonarQubeEnv('sonar-qualitygate') {
-                    sh "${scannerSonar}/bin/sonar-scanner \
-                         -Dmvn -X sonar:sonar \
-                         -Dsonar.projectKey="${nome_projeto}" \
-                         -Dsonar.host.url="${sonar_host}" \
-                         -Dsonar.login="${sonar_login}" \
+                    sh "${scannerSonar}/bin/sonar-scanner " \
+                         "-Dmvn -X sonar:sonar" \
+                         "-Dsonar.projectKey="${nome_projeto}"" \
+                         "-Dsonar.host.url="${sonar_host}"" \
+                         "-Dsonar.login="${sonar_login}"" \
                         //  -Dsonar.java.binaries=target \
-                         -Dsonar.covarege.exclusions="**/mvn/**,**/scr/teste/**,**/model/**,**/Application.java" \
+                         "-Dsonar.covarege.exclusions="**/mvn/**,**/scr/teste/**,**/model/**,**/Application.java"" \
                          "
                 }
             }
