@@ -1,5 +1,6 @@
 // # Define a tag que inicia o pipeline
 pipeline {
+    // # Definindo variaveis para serem usadas dentro dos steps
      environment {
                 scannerHome = tool "sonar-scanner"
                 nome_projeto="DeployBack"
@@ -45,7 +46,7 @@ pipeline {
         }
         stage ('Sonar Analise') {
             steps {
-                withSonarQubeEnv('sonar-qualitygate') {
+                withSonarQubeEnv('sonar-community') {
                     sh "${scannerHome}/bin/sonar-scanner " +
                          "-Dmvn -X sonar:sonar" +
                          "-Dsonar.projectKey=${nome_projeto}" +
