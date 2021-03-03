@@ -1,15 +1,18 @@
 // # Define a tag que inicia o pipeline
 pipeline {
-    nome_projeto="DeployBack"
-    //sonar_login="09eb73b479ebf07efc6f91a8c1522943773ece4f"
-    sonar_login="62cbbfd2f357c6897f9b54ee175f7e360bb6e937"
-    sonar_host="http://192.168.0.121:9000"
+     environment {
+                nome_projeto="DeployBack"
+                //sonar_login="09eb73b479ebf07efc6f91a8c1522943773ece4f"
+                sonar_login="62cbbfd2f357c6897f9b54ee175f7e360bb6e937"
+                sonar_host="http://192.168.0.121:9000"
+    }
 
     // # Define o agent que vai ser executado, no caso abaixo qualquer um
     agent any
 
      tools {
         maven "MAVEN_INSTALADO_CONTAINER"
+        scannerSonar "sonar-scanner"
     }
     
     // # Os stages que vão ter na nossa pipeline no momento em que estiver em execução.
@@ -38,30 +41,7 @@ pipeline {
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }    
         }
-        // stage('Code Quality Check via SonarQube') {
-        //     steps {
-        //         script {
-        //             def scannerHome = tool 'sonarqube';
-        //                 withSonarQubeEnv("sonar-qualitygate") {
-        //                 sh "${tool("sonarqube")}/bin/sonar-scanner \
-        //                 -Dsonar.projectKey="$nome_projeto" \
-        //                 -Dsonar.sources=. \
-        //                 -Dsonar.css.node=. \
-        //                 -Dsonar.host.url="$sonar_host" \
-        //                 -Dsonar.login="$sonar_login""
-        //            }
-        //         }
-        //     }
-        // }
         stage ('Sonar Analise') {
-            // # Criando uma varivael para rodar o sonar configurado de acordo com o Global Toll Configuration do Jenkins
-            environment {
-                scannerSonar = tool 'sonar-scanner'
-                nome_projeto="DeployBack"
-                //sonar_login="09eb73b479ebf07efc6f91a8c1522943773ece4f"
-                sonar_login="62cbbfd2f357c6897f9b54ee175f7e360bb6e937"
-                sonar_host="http://192.168.0.121:9000"
-            }
             steps {
                 withSonarQubeEnv('sonar-qualitygate') {
                     sh "${scannerSonar}/bin/sonar-scanner \
@@ -69,8 +49,9 @@ pipeline {
                          -Dsonar.projectKey="${nome_projeto}" \
                          -Dsonar.host.url="${sonar_host}" \
                          -Dsonar.login="${sonar_login}" \
-                         -Dsonar.java.binaries="target" "
-                        //  -Dsonar.covarege.exclusions=**/mvn/**,**/scr/teste/**,**/model/**,**/Application.java"
+                         -Dsonar.java.binaries="target" \
+                         -Dsonar.covarege.exclusions="**/mvn/**,**/scr/teste/**,**/model/**,**/Application.java" \
+                         "
                 }
             }
         }
