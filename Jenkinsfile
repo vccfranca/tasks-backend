@@ -51,8 +51,8 @@ pipeline {
                          "-Dsonar.host.url="${sonar_host}"" \
                          "-Dsonar.login="${sonar_login}"" \
                         //  -Dsonar.java.binaries=target \
-                         "-Dsonar.covarege.exclusions="$SONAR_EXCLUSIONS"" \
-                         "
+                         "-Dsonar.covarege.exclusions="$SONAR_EXCLUSIONS"" 
+                         
                 }
             }
         }
