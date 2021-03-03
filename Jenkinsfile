@@ -26,20 +26,20 @@ pipeline {
             // # Os steps são os passos que nosso stage vai fazer.
             steps {
                 // # No comando abaixo estamos falando par o maven realizar uma limpeza antes de realizar o build. O parâmetro skipTest faz que não rode o test nesse momento.
-                sh 'mvn clean package -DskipTest=false'
+                sh 'mvn clean package -DskipTest=true'
             }
         }
-        // stage ('Unit Testes') {
-        //     steps {
-        //         // # Ao executar o teste aqui temos de prestar atenção para não colocar o clena antes, pois o mesmo vai apagar o conteudo da pasta target gerado no build
-        //         sh 'mvn test'
-        //     }
-        // }
-        // stage ('Check Dependencias com OWASP') {
-        //     steps {
-        //         dependencyCheck additionalArguments: '', odcInstallation: 'Owasp-6.1.1'
-        //     }
-        // }
+        stage ('Unit Testes') {
+            steps {
+                // # Ao executar o teste aqui temos de prestar atenção para não colocar o clena antes, pois o mesmo vai apagar o conteudo da pasta target gerado no build
+                sh 'mvn test'
+            }
+        }
+        stage ('Check Dependencias com OWASP') {
+            steps {
+                dependencyCheck additionalArguments: '', odcInstallation: 'Owasp-6.1.1'
+            }
+        }
         stage ('Publicando Resultados OWAS') {
             steps {
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
