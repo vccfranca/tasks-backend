@@ -57,6 +57,10 @@ pipeline {
             // # Criando uma varivael para rodar o sonar configurado de acordo com o Global Toll Configuration do Jenkins
             environment {
                 scannerSonar = tool 'sonar-scanner'
+                nome_projeto="DeployBack"
+                //sonar_login="09eb73b479ebf07efc6f91a8c1522943773ece4f"
+                sonar_login="62cbbfd2f357c6897f9b54ee175f7e360bb6e937"
+                sonar_host="http://192.168.0.121:9000"
             }
             steps {
                 withSonarQubeEnv('sonar-qualitygate') {
