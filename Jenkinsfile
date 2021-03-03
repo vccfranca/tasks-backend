@@ -1,6 +1,7 @@
 // # Define a tag que inicia o pipeline
 pipeline {
      environment {
+                scannerHome = tool "sonar-scanner"
                 nome_projeto="DeployBack"
                 //sonar_login="09eb73b479ebf07efc6f91a8c1522943773ece4f"
                 sonar_login="62cbbfd2f357c6897f9b54ee175f7e360bb6e937"
@@ -13,7 +14,7 @@ pipeline {
 
      tools {
         maven "MAVEN_INSTALADO_CONTAINER"
-        scannerHome "sonar-scanner"
+        
     }
     
     // # Os stages que vão ter na nossa pipeline no momento em que estiver em execução.
