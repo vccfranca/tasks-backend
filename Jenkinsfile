@@ -15,6 +15,7 @@ pipeline {
 
      tools {
         maven "MAVEN_INSTALADO_CONTAINER"
+        jdk "JDK-11"
         
     }
     
@@ -48,7 +49,6 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonar-community') {
                     sh "${scannerHome}/bin/sonar-scanner " +
-                         "-Dmvn -X sonar:sonar " +
                          "-Dsonar.projectKey=${nome_projeto} " +
                          "-Dsonar.host.url=${sonar_host} " +
                          "-Dsonar.login=${sonar_login} " +
