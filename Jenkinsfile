@@ -5,6 +5,7 @@ pipeline {
                 //sonar_login="09eb73b479ebf07efc6f91a8c1522943773ece4f"
                 sonar_login="62cbbfd2f357c6897f9b54ee175f7e360bb6e937"
                 sonar_host="http://192.168.0.121:9000"
+                SONAR_EXCLUSIONS="**/mvn/**,**/scr/teste/**,**/model/**,**/Application.java"
     }
 
     // # Define o agent que vai ser executado, no caso abaixo qualquer um
@@ -50,7 +51,7 @@ pipeline {
                          "-Dsonar.host.url="${sonar_host}"" \
                          "-Dsonar.login="${sonar_login}"" \
                         //  -Dsonar.java.binaries=target \
-                         "-Dsonar.covarege.exclusions="**/mvn/**,**/scr/teste/**,**/model/**,**/Application.java"" \
+                         "-Dsonar.covarege.exclusions="$SONAR_EXCLUSIONS"" \
                          "
                 }
             }
