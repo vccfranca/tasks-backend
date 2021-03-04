@@ -2,7 +2,7 @@
 pipeline {
     // # Definindo variaveis para serem usadas dentro dos steps
      environment {
-                scannerHome = tool "sonar-scanner"
+                scannerInicial = tool "sonar-scanner"
                 nome_projeto="DeployBack"
                 //sonar_login="09eb73b479ebf07efc6f91a8c1522943773ece4f"
                 sonar_login="62cbbfd2f357c6897f9b54ee175f7e360bb6e937"
@@ -48,7 +48,7 @@ pipeline {
         stage ('Sonar Analise') {
             steps {
                 withSonarQubeEnv('sonar-community') {
-                    sh "${scannerHome}/bin/sonar-scanner " +
+                    sh "${scannerInicial}/bin/sonar-scanner " +
                          "-Dsonar.projectKey=${nome_projeto} " +
                          "-Dsonar.host.url=${sonar_host} " +
                          "-Dsonar.login=${sonar_login} " +
@@ -60,7 +60,7 @@ pipeline {
         }
         stage ('Quality Gate')  {
             steps {
-                sleep(10)
+                sleep(20)
                 timeout(time: 1, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                     
