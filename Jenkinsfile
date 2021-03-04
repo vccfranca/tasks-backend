@@ -76,6 +76,9 @@ pipeline {
 
         }
         stage ('API Test'){
+            tools {
+                maven "MAVEN_INSTALADO_CONTAINER"
+            }
             steps {
                 dir('api-test') {
                     git branch: 'main', credentialsId: 'nalvic2332', url: 'https://github.com/vccfranca/api-test-spring'
