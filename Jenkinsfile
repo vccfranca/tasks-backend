@@ -77,6 +77,7 @@ pipeline {
         }
         stage ('API Test'){
             tools {
+                jdk "JDK-11"
                 maven "MAVEN_INSTALADO_CONTAINER"
             }
             steps {
