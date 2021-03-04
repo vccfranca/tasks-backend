@@ -75,6 +75,11 @@ pipeline {
             }
 
         }
+        stage ('API Test')
+            steps {
+                git branch: 'main', credentialsId: 'nalvic2332', url: 'https://github.com/vccfranca/api-test-spring'
+                sh 'mvn test'
+            }
 
     }
 }
