@@ -29,22 +29,22 @@ pipeline {
                 sh 'mvn clean package -DskipTest=true'
             }
         }
-        stage ('Unit Testes') {
-            steps {
-                // # Ao executar o teste aqui temos de prestar atenção para não colocar o clena antes, pois o mesmo vai apagar o conteudo da pasta target gerado no build
-                sh 'mvn test'
-            }
-        }
-        stage ('Check Dependencias com OWASP') {
-            steps {
-                dependencyCheck additionalArguments: '', odcInstallation: 'Owasp-6.1.1'
-            }
-        }
-        stage ('Publicando Resultados OWAS') {
-            steps {
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-            }    
-        }
+        // stage ('Unit Testes') {
+        //     steps {
+        //         // # Ao executar o teste aqui temos de prestar atenção para não colocar o clena antes, pois o mesmo vai apagar o conteudo da pasta target gerado no build
+        //         sh 'mvn test'
+        //     }
+        // }
+        // stage ('Check Dependencias com OWASP') {
+        //     steps {
+        //         dependencyCheck additionalArguments: '', odcInstallation: 'Owasp-6.1.1'
+        //     }
+        // }
+        // stage ('Publicando Resultados OWAS') {
+        //     steps {
+        //         dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+        //     }    
+        // }
         stage ('Sonar Analise') {
             steps {
                 withSonarQubeEnv('sonar-community') {
