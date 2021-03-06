@@ -35,40 +35,40 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        // stage ('Check Dependencias com OWASP') {
-        //     steps {
-        //         dependencyCheck additionalArguments: '', odcInstallation: 'Owasp-6.1.1'
-        //     }
-        // }
-        // stage ('Publicando Resultados OWAS') {
-        //     steps {
-        //         dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-        //     }    
-        // }
-        // stage ('Sonar Analise') {
-        //     steps {
-        //         withSonarQubeEnv('sonar-community') {
-        //             sh "${scannerInicial}/bin/sonar-scanner " +
-        //                  "-Dsonar.projectKey=${nome_projeto} " +
-        //                  "-Dsonar.host.url=${sonar_host} " +
-        //                  "-Dsonar.login=${sonar_login} " +
-        //                  "-Dsonar.java.binaries=target " +
-        //                  "-Dsonar.covarege.exclusions=$SONAR_EXCLUSIONS"
+        stage ('Check Dependencias com OWASP') {
+            steps {
+                dependencyCheck additionalArguments: '', odcInstallation: 'Owasp-6.1.1'
+            }
+        }
+        stage ('Publicando Resultados OWAS') {
+            steps {
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }    
+        }
+        stage ('Sonar Analise') {
+            steps {
+                withSonarQubeEnv('sonar-community') {
+                    sh "${scannerInicial}/bin/sonar-scanner " +
+                         "-Dsonar.projectKey=${nome_projeto} " +
+                         "-Dsonar.host.url=${sonar_host} " +
+                         "-Dsonar.login=${sonar_login} " +
+                         "-Dsonar.java.binaries=target " +
+                         "-Dsonar.covarege.exclusions=$SONAR_EXCLUSIONS"
                          
-        //         }
-        //     }
-        // }
-        // stage ('Quality Gate')  {
-        //     steps {
-        //         sleep(20)
-        //         timeout(time: 1, unit: 'MINUTES') {
-        //             waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+        stage ('Quality Gate')  {
+            steps {
+                sleep(20)
+                timeout(time: 1, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
                     
 
-        //         }
+                }
 
-        //     }
-        // }
+            }
+        }
         stage ('Deploy BackEnd'){
             steps {
                 deploy adapters: [tomcat9(credentialsId: 'tomcat_9', path: '', url: 'http://192.168.0.121:8085/')], contextPath: 'task-backend', war: 'target/tasks-backend.war'
