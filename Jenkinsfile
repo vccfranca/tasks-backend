@@ -101,6 +101,15 @@ pipeline {
                 deploy adapters: [tomcat9(credentialsId: 'tomcat_9', path: '', url: 'http://192.168.0.121:8085/')], contextPath: 'tasks', war: 'frontend/target/tasks.war'
             }
         }
+        stage ('Testes Funcionais') {
+            steps {
+                dir('teste-funcional') {
+                    git branch: 'master', credentialsId: '9322c792-9a8f-4227-a35f-c0a7abddf807', url: 'https://github.com/vccfranca/funcional-test'
+                    sh 'mvn test'
+
+                }
+            }
+        }
     }
 }
 
