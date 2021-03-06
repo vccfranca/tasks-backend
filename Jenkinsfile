@@ -98,7 +98,11 @@ pipeline {
         }
         stage ('Deploy FrontEnd') {
             steps {
+                sh 'caminho do diretorio antes do CD'
+                sh 'pwd'
                 sh 'cd frontend'
+                sh 'caminho do diretorio depois do CD'
+                sh 'pwd'
                 deploy adapters: [tomcat9(credentialsId: 'tomcat_9', path: '', url: 'http://192.168.0.121:8085/')], contextPath: 'tasks', war: 'target/tasks.war'
             }
         }
