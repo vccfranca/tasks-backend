@@ -82,7 +82,7 @@ pipeline {
             }
             steps {
                 dir('api-test') {
-                    git branch: 'main', credentialsId: 'nalvic2332', url: 'https://github.com/vccfranca/api-test-spring'
+                    git branch: 'main', credentialsId: '9322c792-9a8f-4227-a35f-c0a7abddf807', url: 'https://github.com/vccfranca/api-test-spring'
                     sh 'mvn test'
                 }
             }
