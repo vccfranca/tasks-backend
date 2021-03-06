@@ -52,7 +52,7 @@ pipeline {
                          "-Dsonar.projectKey=${nome_projeto} " +
                          "-Dsonar.host.url=${sonar_host} " +
                          "-Dsonar.login=${sonar_login} " +
-                        //  "-Dsonar.java.binaries=target " +
+                         "-Dsonar.java.binaries=target " +
                          "-Dsonar.covarege.exclusions=$SONAR_EXCLUSIONS"
                          
                 }
@@ -61,7 +61,7 @@ pipeline {
         stage ('Quality Gate')  {
             steps {
                 sleep(40)
-                timeout(time: 1, unit: 'MINUTES') {
+                timeout(time: 3, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                     
 
