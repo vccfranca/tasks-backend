@@ -4,8 +4,7 @@ pipeline {
      environment {
                 scannerInicial = tool "sonar-scanner"
                 nome_projeto="DeployBack"
-                //sonar_login="09eb73b479ebf07efc6f91a8c1522943773ece4f"
-                sonar_login="62cbbfd2f357c6897f9b54ee175f7e360bb6e937"
+                sonar_login="2165fba02d0c5bbc6b4ceeecdd6883838db41cbc"
                 sonar_host="http://192.168.0.121:9000"
                 SONAR_EXCLUSIONS="**/mvn/**,**/scr/teste/**,**/model/**,**/Application.java"
     }
@@ -63,8 +62,6 @@ pipeline {
                 sleep(40)
                 timeout(time: 3, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
-                    
-
                 }
 
             }
