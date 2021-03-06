@@ -87,7 +87,10 @@ pipeline {
                 }
             }
         }
-        stage ('') {
+        stage ('Build FrontEnd') {
+            steps {
+                sh 'echo frontedn'
+            }
 
         }  
 
